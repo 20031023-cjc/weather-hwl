@@ -2,22 +2,32 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>天气查询</title>
+  <title>高级天气查询</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.8.0/tsparticles.bundle.min.js"></script>
 </head>
 <body>
-  <div id="particles-js"></div>
-  <div class="container">
+  <div id="tsparticles"></div>
+  <div class="app-container">
     <h1>天气查询</h1>
-    <form id="form">
-      <input id="input" type="text" placeholder="请输入城市名（例：Tokyo）" />
-      <button type="submit">查询</button>
-    </form>
+    <div class="language-select">
+      <label for="lang-select">选择语言：</label>
+      <select id="lang-select">
+        <option value="zh">中文</option>
+        <option value="ja">日本語</option>
+        <option value="en" selected>English</option>
+      </select>
+    </div>
+
+    <input id="city-input" type="text" placeholder="请输入城市名..." autocomplete="off" />
+    <div id="suggestions" class="suggestions"></div>
+
+    <button id="search-btn">查询</button>
+
     <div id="error" class="error"></div>
     <div id="weather" class="weather"></div>
-    <div id="suggestions" class="suggestions"></div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
   <script src="script.js"></script>
 </body>
 </html>
