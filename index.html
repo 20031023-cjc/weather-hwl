@@ -2,58 +2,22 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>天气查询测试</title>
+  <title>天气查询</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>天气查询</h1>
-  <form id="form">
-    <input id="input" type="text" placeholder="请输入英文城市名（例：Tokyo）" />
-    <button type="submit">查询</button>
-  </form>
-  <div id="error" style="color:red;"></div>
-  <div id="weather"></div>
-
-  <script>
-    const form = document.getElementById('form');
-    const input = document.getElementById('input');
-    const errorDiv = document.getElementById('error');
-    const weatherDiv = document.getElementById('weather');
-
-    const API_KEY = 'da7be22a064e8e36c8e9385be0d67fc4'; // 换成你的Key
-
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const city = input.value.trim();
-      if (!city) {
-        errorDiv.textContent = '请输入城市名';
-        weatherDiv.textContent = '';
-        return;
-      }
-      errorDiv.textContent = '';
-      weatherDiv.textContent = '加载中...';
-
-      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric&lang=zh_cn`)
-        .then(res => res.json())
-        .then(data => {
-          if (data.cod !== 200) {
-            errorDiv.textContent = `错误：${data.message}`;
-            weatherDiv.textContent = '';
-            return;
-          }
-          errorDiv.textContent = '';
-          weatherDiv.innerHTML = `
-            <h2>${data.name} (${data.sys.country})</h2>
-            <p>天气：${data.weather[0].description}</p>
-            <p>温度：${data.main.temp} ℃</p>
-            <p>湿度：${data.main.humidity}%</p>
-            <p>风速：${data.wind.speed} m/s</p>
-          `;
-        })
-        .catch(() => {
-          errorDiv.textContent = '网络错误';
-          weatherDiv.textContent = '';
-        });
-    });
-  </script>
+  <div id="particles-js"></div>
+  <div class="container">
+    <h1>天气查询</h1>
+    <form id="form">
+      <input id="input" type="text" placeholder="请输入城市名（例：Tokyo）" />
+      <button type="submit">查询</button>
+    </form>
+    <div id="error" class="error"></div>
+    <div id="weather" class="weather"></div>
+    <div id="suggestions" class="suggestions"></div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
