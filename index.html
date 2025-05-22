@@ -4,29 +4,48 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>天気検索サイト</title>
+
+  <!-- Weather Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css"
+  />
+
+  <!-- 自己写的样式 -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- 粒子动画容器 -->
+  <div id="particles-js"></div>
+
+  <!-- 语言切换按钮 -->
   <div class="lang-switcher">
-    <button data-lang="ja">日本語</button>
+    <button data-lang="ja" class="active">日本語</button>
     <button data-lang="en">English</button>
     <button data-lang="zh_cn">中文</button>
   </div>
 
   <div class="container">
     <h1 id="title">天気検索</h1>
-    <input type="text" id="cityInput" placeholder="都市名を入力してください" />
+    <input
+      type="text"
+      id="cityInput"
+      placeholder="都市名を入力してください"
+      autocomplete="off"
+    />
     <button id="searchBtn">検索</button>
 
     <div id="weatherResult" class="hidden">
       <h2 id="cityName"></h2>
+      <i id="weatherIcon" class="wi"></i>
       <p id="description"></p>
-      <p><span id="tempLabel">気温</span>：<span id="temp"></span> ℃</p>
-      <p><span id="humidityLabel">湿度</span>：<span id="humidity"></span> %</p>
-      <p><span id="windLabel">風速</span>：<span id="wind"></span> m/s</p>
+      <p id="temperature"></p>
+      <p id="humidity"></p>
+      <p id="wind"></p>
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
