@@ -2,50 +2,58 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>天気検索サイト</title>
-
-  <!-- Weather Icons -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css"
-  />
-
-  <!-- 自己写的样式 -->
-  <link rel="stylesheet" href="style.css" />
+  <title>天气查询测试</title>
 </head>
 <body>
-  <!-- 粒子动画容器 -->
-  <div id="particles-js"></div>
+  <h1>天气查询</h1>
+  <form id="form">
+    <input id="input" type="text" placeholder="请输入英文城市名（例：Tokyo）" />
+    <button type="submit">查询</button>
+  </form>
+  <div id="error" style="color:red;"></div>
+  <div id="weather"></div>
 
-  <!-- 语言切换按钮 -->
-  <div class="lang-switcher">
-    <button data-lang="ja" class="active">日本語</button>
-    <button data-lang="en">English</button>
-    <button data-lang="zh_cn">中文</button>
-  </div>
+  <script>
+    const form = document.getElementById('form');
+    const input = document.getElementById('input');
+    const errorDiv = document.getElementById('error');
+    const weatherDiv = document.getElementById('weather');
 
-  <div class="container">
-    <h1 id="title">天気検索</h1>
-    <input
-      type="text"
-      id="cityInput"
-      placeholder="都市名を入力してください"
-      autocomplete="off"
-    />
-    <button id="searchBtn">検索</button>
+    const API_KEY = 'da7be22a064e8e36c8e9385be0d67fc4'; // 换成你的Key
 
-    <div id="weatherResult" class="hidden">
-      <h2 id="cityName"></h2>
-      <i id="weatherIcon" class="wi"></i>
-      <p id="description"></p>
-      <p id="temperature"></p>
-      <p id="humidity"></p>
-      <p id="wind"></p>
-    </div>
-  </div>
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const city = input.value.trim();
+      if (!city) {
+        errorDiv.textContent = '请输入城市名';
+        weatherDiv.textContent = '';
+        return;
+      }
+      errorDiv.textContent = '';
+      weatherDiv.textContent = '加载中...';
 
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script src="script.js"></script>
+      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric&lang=zh_cn`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.cod !== 200) {
+            errorDiv.textContent = `错误：${data.message}`;
+            weatherDiv.textContent = '';
+            return;
+          }
+          errorDiv.textContent = '';
+          weatherDiv.innerHTML = `
+            <h2>${data.name} (${data.sys.country})</h2>
+            <p>天气：${data.weather[0].description}</p>
+            <p>温度：${data.main.temp} ℃</p>
+            <p>湿度：${data.main.humidity}%</p>
+            <p>风速：${data.wind.speed} m/s</p>
+          `;
+        })
+        .catch(() => {
+          errorDiv.textContent = '网络错误';
+          weatherDiv.textContent = '';
+        });
+    });
+  </script>
 </body>
 </html>
