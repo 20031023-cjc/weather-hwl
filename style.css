@@ -1,67 +1,158 @@
-body, html {
+/* Reset */
+* {
   margin: 0;
   padding: 0;
-  height: 100%;
-  font-family: 'Arial', sans-serif;
-  background-color: #282c34;
-  color: white;
+  box-sizing: border-box;
 }
 
-#particles-js {
-  position: absolute;
-  top: 0;
-  left: 0;
+body, html {
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0f2027;  /* 渐变背景 */
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #eee;
+  overflow: hidden;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+#tsparticles {
+  position: fixed;
+  top: 0; left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 0;
 }
 
-.container {
+.app-container {
   position: relative;
-  z-index: 1;
+  z-index: 10;
+  max-width: 480px;
+  margin: 80px auto 0;
+  background: rgba(255 255 255 / 0.1);
+  padding: 30px 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255 255 255 / 0.18);
   text-align: center;
-  padding: 20px;
 }
 
-input, button {
-  padding: 10px;
-  margin: 5px;
-  font-size: 16px;
+h1 {
+  font-weight: 700;
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+  letter-spacing: 1.2px;
+  color: #ffcc00;
+  text-shadow: 0 0 8px #ffcc00;
+}
+
+.language-select {
+  margin-bottom: 15px;
+  color: #eee;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+#lang-select {
+  margin-left: 8px;
+  padding: 5px 10px;
+  font-size: 1rem;
+  border-radius: 8px;
   border: none;
-  border-radius: 5px;
-}
-
-button {
-  background-color: #4CAF50;
-  color: white;
+  outline: none;
+  background: rgba(255 255 255 / 0.25);
+  color: #111;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-button:hover {
-  background-color: #45a049;
+#lang-select:hover, #lang-select:focus {
+  background: rgba(255 255 255 / 0.5);
+}
+
+#city-input {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  background: rgba(255 255 255 / 0.2);
+  color: #fff;
+  transition: background 0.3s ease;
+  box-shadow: inset 0 0 10px rgba(255 255 255 / 0.15);
+}
+
+#city-input::placeholder {
+  color: #ddd;
+  opacity: 1;
+}
+
+#city-input:focus {
+  background: rgba(255 255 255 / 0.35);
+  box-shadow: 0 0 8px 2px #ffcc00;
+  color: #ffcc00;
+}
+
+button#search-btn {
+  margin-top: 20px;
+  padding: 12px 30px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(45deg, #ffcc00, #ff9900);
+  color: #111;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 0 12px #ffcc00;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+button#search-btn:hover {
+  background: linear-gradient(45deg, #ffdd33, #ffaa00);
+  box-shadow: 0 0 18px 3px #ffdd33;
 }
 
 .error {
-  color: red;
+  margin-top: 15px;
+  color: #ff5555;
+  font-weight: 700;
+  min-height: 24px;
 }
 
 .weather {
-  margin-top: 20px;
+  margin-top: 25px;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: #eee;
+  user-select: text;
 }
 
 .suggestions {
-  margin-top: 10px;
-  max-height: 150px;
+  margin-top: 8px;
+  max-height: 140px;
   overflow-y: auto;
-  background-color: #333;
-  border-radius: 5px;
+  background: rgba(255 255 255 / 0.15);
+  border-radius: 12px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.4);
+  user-select: none;
 }
 
 .suggestion-item {
-  padding: 5px;
+  padding: 10px 15px;
   cursor: pointer;
+  color: #fff;
+  border-bottom: 1px solid rgba(255 255 255 / 0.1);
+  transition: background 0.25s ease;
 }
 
 .suggestion-item:hover {
-  background-color: #575757;
+  background: rgba(255 204 0, 0.3);
+  color: #ffcc00;
 }
