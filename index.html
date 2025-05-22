@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>天気検索サイト</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="lang-switcher">
+    <button data-lang="ja">日本語</button>
+    <button data-lang="en">English</button>
+    <button data-lang="zh_cn">中文</button>
+  </div>
+
+  <div class="container">
+    <h1 id="title">天気検索</h1>
+    <input type="text" id="cityInput" placeholder="都市名を入力してください" />
+    <button id="searchBtn">検索</button>
+
+    <div id="weatherResult" class="hidden">
+      <h2 id="cityName"></h2>
+      <p id="description"></p>
+      <p><span id="tempLabel">気温</span>：<span id="temp"></span> ℃</p>
+      <p><span id="humidityLabel">湿度</span>：<span id="humidity"></span> %</p>
+      <p><span id="windLabel">風速</span>：<span id="wind"></span> m/s</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
